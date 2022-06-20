@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  api-spotify:
+  events-api:
     container_name: events-api-container
     build:
       context: .
