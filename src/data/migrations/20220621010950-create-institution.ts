@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: false
       },
-      fk_category_institution: {
+      id_category_institution: {
         type: Sequelize.INTEGER,
         references: { model: 'category_institution', key: 'id' },
         allowNull: false
