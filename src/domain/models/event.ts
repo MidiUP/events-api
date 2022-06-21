@@ -2,7 +2,7 @@ import { BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, Upd
 import Institution from './institution'
 
 @Table({ tableName: 'event', timestamps: true })
-export default class Event extends Model {
+export default class EventModel extends Model {
   @PrimaryKey
   @Column({ autoIncrement: true })
   id: number

@@ -2,7 +2,7 @@ import { BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, Upd
 import CategoryInstitution from './category_institution'
 
 @Table({ tableName: 'institution', timestamps: true })
-export default class Institution extends Model {
+export default class InstitutionModel extends Model {
   @PrimaryKey
   @Column({ autoIncrement: true })
   id: number

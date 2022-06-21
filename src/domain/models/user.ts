@@ -1,7 +1,7 @@
 import { Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript'
 
 @Table({ tableName: 'user', timestamps: true })
-export default class User extends Model {
+export default class UserModel extends Model {
   @PrimaryKey
   @Column({ autoIncrement: true })
   id: number
