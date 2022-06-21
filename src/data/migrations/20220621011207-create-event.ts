@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      fk_institution: {
+      fk_id_institution: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'institution', key: 'id' },
