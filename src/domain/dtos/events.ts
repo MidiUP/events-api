@@ -3,8 +3,8 @@ import InstitutionModel from '../models/institution'
 export interface CreateEventDto {
   name: string
   date_hour: Date
-  available_tickets: string
-  sold_tickets: string
+  available_tickets: number
+  sold_tickets: number
   id_institution: number
 }
 

@@ -1,3 +1,4 @@
+import { serverError, success } from './../../../src/presentation/helpers/http-helpers'
 import { errorValidateFunction } from './../../helpers/error-validate-mock'
 import { UnprocessableEntityError } from './../../../src/presentation/errors/unprocessable-entity-error'
 import { IEventRepository } from './../../../src/infra/db/protocols/i-event-repository'
@@ -7,6 +8,7 @@ import { CreateEventController } from '../../../src/presentation/controllers/cre
 import { Validator } from '../../../src/presentation/protocols/validator'
 import dateMock from '../../helpers/date-mock'
 import { unprocessableEntity } from '../../../src/presentation/helpers/http-helpers'
+import { throwErrorFunction } from '../../helpers/throw-error-mock'
 
 interface SutTypes {
   sut: CreateEventController
@@ -68,5 +70,48 @@ describe('create event controller', () => {
     jest.spyOn(eventValidator, 'validate').mockImplementationOnce(errorValidateFunction)
     const response = await sut.handle(request)
     expect(response).toEqual(unprocessableEntity(new UnprocessableEntityError('any_error')))
+  })
+
+  test('shold return server error if validate throw error', async () => {
+    const request = {
+      header: 'any_header',
+      body: 'any_body'
+    }
+    const { sut, eventValidator } = makeSut()
+    jest.spyOn(eventValidator, 'validate').mockImplementationOnce(throwErrorFunction)
+    const response = await sut.handle(request)
+    expect(response).toEqual(serverError(new Error()))
+  })
+
+  test('validator shold be called with correct params', async () => {
+    const request = {
+      header: 'any_header',
+      body: 'any_body'
+    }
+    const { sut, eventValidator } = makeSut()
+    const spyEventValidator = jest.spyOn(eventValidator, 'validate')
+    await sut.handle(request)
+    expect(spyEventValidator).toHaveBeenCalledWith(request.body)
+  })
+
+  test('shold return server error if service throw error', async () => {
+    const request = {
+      header: 'any_header',
+      body: 'any_body'
+    }
+    const { sut, eventService } = makeSut()
+    jest.spyOn(eventService, 'create').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const response = await sut.handle(request)
+    expect(response).toEqual(serverError(new Error()))
+  })
+
+  test('shold return succes if all right', async () => {
+    const request = {
+      header: 'any_header',
+      body: 'any_body'
+    }
+    const { sut } = makeSut()
+    const response = await sut.handle(request)
+    expect(response).toEqual(success(mockEventDto))
   })
 })
