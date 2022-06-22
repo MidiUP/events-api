@@ -13,5 +13,8 @@ export class EventRepository implements IEventRepository {
     return newEventDto
   }
 
-  getAll: () => Promise<EventDto[]>
+  async getAll (): Promise<EventDto[]> {
+    const events = await this.repositoryEvent.findAll()
+    return events
+  }
 }

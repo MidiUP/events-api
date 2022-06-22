@@ -7,6 +7,7 @@
     "start": "nodemon src/index.ts",
     "dev": "nodemon src/main/server.ts",
     "test": "jest --passWithNoTests --watch --silent",
+    "test:all": "jest --passWithNoTests --watchAll --silent",
     "test:unit": "npm test -- -c jest-unit-config.js",
     "test:integration": "npm test -- -c jest-integration-config.js",
     "prepare-husky": "husky install"

@@ -8,10 +8,10 @@ export abstract class AbstractEventService {
   ) {}
 
   async create (event: CreateEventDto): Promise<EventDto> {
-    return this.eventRepository.add(event)
+    return await this.eventRepository.add(event)
   }
 
   async getAll (): Promise<EventDto[]> {
-    return this.eventRepository.getAll()
+    return await this.eventRepository.getAll()
   }
 }
