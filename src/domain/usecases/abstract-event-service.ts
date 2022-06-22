@@ -14,4 +14,8 @@ export abstract class AbstractEventService {
   async getAll (): Promise<EventDto[]> {
     return await this.eventRepository.getAll()
   }
+
+  async update (id: number, event: CreateEventDto): Promise<EventDto> {
+    return await this.eventRepository.update(id, event)
+  }
 }
