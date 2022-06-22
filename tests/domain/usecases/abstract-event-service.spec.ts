@@ -29,6 +29,10 @@ const makeEventRepository = (): IEventRepository => {
     async add (event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
     }
+
+    async getAll (): Promise<EventDto[]> {
+      return new Promise(resolve => resolve([mockEventDto]))
+    }
   }
 
   return new EventRepositoryStub()
@@ -54,5 +58,20 @@ describe('AbstractEventService create', () => {
     const { sut } = makeSut()
     const response = await sut.create(mockCreateEventDto)
     expect(response).toEqual(mockEventDto)
+  })
+})
+
+describe('AbstractEventService getAll', () => {
+  test('eventRepository getAll shold be called with correct params', async () => {
+    const { sut, eventRepository } = makeSut()
+    const spyEventRepository = jest.spyOn(eventRepository, 'getAll')
+    await sut.getAll()
+    expect(spyEventRepository).toHaveBeenCalledWith()
+  })
+
+  test('shold return [mockEventDto] if all right', async () => {
+    const { sut } = makeSut()
+    const response = await sut.getAll()
+    expect(response).toEqual([mockEventDto])
   })
 })

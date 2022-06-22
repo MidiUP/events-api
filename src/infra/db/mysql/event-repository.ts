@@ -12,4 +12,6 @@ export class EventRepository implements IEventRepository {
     const newEventDto = formatEventDto(newEvent)
     return newEventDto
   }
+
+  getAll: () => Promise<EventDto[]>
 }
