@@ -4,6 +4,7 @@ import { IEventRepository } from './../../../src/infra/db/protocols/i-event-repo
 import { CreateEventDto, EventDto } from './../../../src/domain/dtos/events'
 import { AbstractEventService } from '../../../src/domain/usecases/abstract-event-service'
 import dateMock from '../../helpers/date-mock'
+import event from '../../../src/domain/models/event'
 
 interface SutTypes {
   sut: ReadEventController
@@ -20,8 +21,9 @@ const mockEventDto: EventDto = {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
+    getById: (id: number) => Promise<event>
+    update: (eventForUpdate: event, newEvent: CreateEventDto) => Promise<EventDto>
     delete: (id: number) => Promise<void>
-    update: (id: number, event: CreateEventDto) => Promise<EventDto>
     async getAll (): Promise<EventDto[]> {
       return new Promise(resolve => resolve([mockEventDto]))
     }

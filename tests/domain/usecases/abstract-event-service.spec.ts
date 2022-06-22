@@ -2,6 +2,7 @@ import { IEventRepository } from './../../../src/infra/db/protocols/i-event-repo
 import { CreateEventDto, EventDto } from './../../../src/domain/dtos/events'
 import { AbstractEventService } from '../../../src/domain/usecases/abstract-event-service'
 import dateMock from '../../helpers/date-mock'
+import EventModel from '../../../src/domain/models/event'
 
 interface SutTypes {
   sut: AbstractEventService
@@ -26,9 +27,10 @@ const mockCreateEventDto: CreateEventDto = {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
+    getById: (id: number) => Promise<EventModel>
     async delete (id: number): Promise<void> {}
 
-    async update (id: number, event: CreateEventDto): Promise<EventDto> {
+    async update (eventForUpdate: EventModel, event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
     }
 
@@ -85,8 +87,7 @@ describe('AbstractEventService getAll', () => {
 describe('AbstractEventService update', () => {
   test('shold return mockEventDto if all right', async () => {
     const { sut } = makeSut()
-    const mockId = 1
-    const response = await sut.update(mockId, mockCreateEventDto)
+    const response = await sut.update(mockEventDto as EventModel, mockCreateEventDto)
     expect(response).toEqual(mockEventDto)
   })
 })

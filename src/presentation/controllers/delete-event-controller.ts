@@ -1,3 +1,4 @@
+import { UnprocessableEntityError } from './../errors/unprocessable-entity-error'
 import { noContent } from './../helpers/http-helpers'
 import { Validator } from '../protocols/validator'
 import { serverError, unprocessableEntity } from '../helpers/http-helpers'
@@ -18,6 +19,12 @@ export class DeleteEventController implements Controller {
       if (errorValidator) {
         return unprocessableEntity(errorValidator)
       }
+
+      const existsEvent = await this.eventService.getById(id)
+      if (!existsEvent) {
+        return unprocessableEntity(new UnprocessableEntityError('not found any event with this id'))
+      }
+
       await this.eventService.delete(id)
       return noContent()
     } catch (error) {

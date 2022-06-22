@@ -18,28 +18,21 @@ export class EventRepository implements IEventRepository {
     return events
   }
 
-  async update (id: number, newEvent: CreateEventDto): Promise<EventDto> {
-    const existsEvent = await this.repositoryEvent.findOne({
-      where: {
-        id
-      }
+  async getById (id: number): Promise<EventModel> {
+    const event = await this.repositoryEvent.findOne({
+      where: { id }
     })
-    if (!existsEvent) {
-      throw new Error() // mapear
-    }
-    const eventUpdated = await (await existsEvent.update(newEvent)).save()
+    return event
+  }
+
+  async update (eventForUpdate: EventModel, newEvent: CreateEventDto): Promise<EventDto> {
+    const eventUpdated = await (await eventForUpdate.update(newEvent)).save()
     return eventUpdated
   }
 
   async delete (id: number): Promise<void> {
-    const existsEvent = await this.repositoryEvent.findOne({
-      where: {
-        id
-      }
+    await this.repositoryEvent.destroy({
+      where: { id }
     })
-    if (!existsEvent) {
-      throw new Error() // mapear
-    }
-    await existsEvent.destroy()
   }
 }

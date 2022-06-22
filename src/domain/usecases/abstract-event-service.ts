@@ -1,6 +1,7 @@
 import { EventDto } from './../dtos/events'
 import { IEventRepository } from '../../infra/db/protocols/i-event-repository'
 import { CreateEventDto } from '../dtos/events'
+import EventModel from '../models/event'
 
 export abstract class AbstractEventService {
   constructor (
@@ -15,8 +16,12 @@ export abstract class AbstractEventService {
     return await this.eventRepository.getAll()
   }
 
-  async update (id: number, event: CreateEventDto): Promise<EventDto> {
-    return await this.eventRepository.update(id, event)
+  async getById (id: number): Promise<EventModel> {
+    return await this.eventRepository.getById(id)
+  }
+
+  async update (eventForUpdate: EventModel, event: CreateEventDto): Promise<EventDto> {
+    return await this.eventRepository.update(eventForUpdate, event)
   }
 
   async delete (id: number): Promise<void> {

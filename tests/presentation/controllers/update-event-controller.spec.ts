@@ -8,6 +8,7 @@ import dateMock from '../../helpers/date-mock'
 import { unprocessableEntity, serverError, success } from '../../../src/presentation/helpers/http-helpers'
 import { throwErrorFunction } from '../../helpers/throw-error-mock'
 import { UpdateEventController } from '../../../src/presentation/controllers/update-event-controller'
+import EventModel from '../../../src/domain/models/event'
 
 interface SutTypes {
   sut: UpdateEventController
@@ -37,11 +38,15 @@ const makeEventRepository = (): IEventRepository => {
     delete: (id: number) => Promise<void>
     getAll: () => Promise<EventDto[]>
 
+    async getById (id: number): Promise<EventModel> {
+      return new Promise(resolve => resolve(mockEventDto as EventModel))
+    }
+
     async add (event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
     }
 
-    async update (id: number, event: CreateEventDto): Promise<EventDto> {
+    async update (eventForUpdate: EventModel, event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
     }
   }
@@ -135,5 +140,50 @@ describe('update event controller', () => {
     const { sut } = makeSut()
     const response = await sut.handle(request)
     expect(response).toEqual(success(mockEventDto))
+  })
+
+  test('service getById shold be called with correct params', async () => {
+    const request = {
+      header: {
+        params: { id: 0 }
+      },
+      body: {
+        any_key: 'any_value'
+      }
+    }
+    const { sut, eventService } = makeSut()
+    const spyEventService = jest.spyOn(eventService, 'getById')
+    await sut.handle(request)
+    expect(spyEventService).toHaveBeenCalledWith(request.header.params.id)
+  })
+
+  test('shold return server error if service getById throw error', async () => {
+    const request = {
+      header: {
+        params: { id: 0 }
+      },
+      body: {
+        any_key: 'any_value'
+      }
+    }
+    const { sut, eventService } = makeSut()
+    jest.spyOn(eventService, 'getById').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const response = await sut.handle(request)
+    expect(response).toEqual(serverError(new Error()))
+  })
+
+  test('shold return unprocessable entity if service getById returns null', async () => {
+    const request = {
+      header: {
+        params: { id: 0 }
+      },
+      body: {
+        any_key: 'any_value'
+      }
+    }
+    const { sut, eventService } = makeSut()
+    jest.spyOn(eventService, 'getById').mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    const response = await sut.handle(request)
+    expect(response).toEqual(unprocessableEntity(new UnprocessableEntityError('not found any event with this id')))
   })
 })

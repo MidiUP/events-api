@@ -8,6 +8,7 @@ import { Validator } from '../../../src/presentation/protocols/validator'
 import dateMock from '../../helpers/date-mock'
 import { unprocessableEntity, serverError, success } from '../../../src/presentation/helpers/http-helpers'
 import { throwErrorFunction } from '../../helpers/throw-error-mock'
+import event from '../../../src/domain/models/event'
 
 interface SutTypes {
   sut: CreateEventController
@@ -34,9 +35,9 @@ const makeEventValidator = (): Validator => {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
+    getById: (id: number) => Promise<event>
+    update: (eventForUpdate: event, newEvent: CreateEventDto) => Promise<EventDto>
     delete: (id: number) => Promise<void>
-    update: (id: number, event: CreateEventDto) => Promise<EventDto>
-
     getAll: () => Promise<EventDto[]>
     async add (event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
