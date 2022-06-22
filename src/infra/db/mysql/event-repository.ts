@@ -27,9 +27,19 @@ export class EventRepository implements IEventRepository {
     if (!existsEvent) {
       throw new Error() // mapear
     }
-
     const eventUpdated = await (await existsEvent.update(newEvent)).save()
-
     return eventUpdated
+  }
+
+  async delete (id: number): Promise<void> {
+    const existsEvent = await this.repositoryEvent.findOne({
+      where: {
+        id
+      }
+    })
+    if (!existsEvent) {
+      throw new Error() // mapear
+    }
+    await existsEvent.destroy()
   }
 }

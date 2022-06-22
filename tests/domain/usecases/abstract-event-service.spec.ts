@@ -26,7 +26,11 @@ const mockCreateEventDto: CreateEventDto = {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
-    update: (id: number, event: CreateEventDto) => Promise<EventDto>
+    async delete (id: number): Promise<void> {}
+
+    async update (id: number, event: CreateEventDto): Promise<EventDto> {
+      return new Promise(resolve => resolve(mockEventDto))
+    }
 
     async add (event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
@@ -75,5 +79,31 @@ describe('AbstractEventService getAll', () => {
     const { sut } = makeSut()
     const response = await sut.getAll()
     expect(response).toEqual([mockEventDto])
+  })
+})
+
+describe('AbstractEventService update', () => {
+  test('shold return mockEventDto if all right', async () => {
+    const { sut } = makeSut()
+    const mockId = 1
+    const response = await sut.update(mockId, mockCreateEventDto)
+    expect(response).toEqual(mockEventDto)
+  })
+})
+
+describe('AbstractEventService delete', () => {
+  test('eventRepository delete shold be called with correct params', async () => {
+    const { sut, eventRepository } = makeSut()
+    const spyEventRepository = jest.spyOn(eventRepository, 'delete')
+    const mockId = 1
+    await sut.delete(mockId)
+    expect(spyEventRepository).toHaveBeenCalledWith(mockId)
+  })
+
+  test('shold return noContent if all right', async () => {
+    const { sut } = makeSut()
+    const mockId = 1
+    const response = await sut.delete(mockId)
+    expect(response).toEqual(undefined)
   })
 })

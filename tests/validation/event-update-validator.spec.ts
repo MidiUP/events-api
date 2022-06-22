@@ -12,7 +12,7 @@ const makeSut = (): sutTypes => {
   }
 }
 
-describe('event create validation', () => {
+describe('event update validation', () => {
   test('should return error if name is not passed', async () => {
     const { sut } = makeSut()
     const req = {

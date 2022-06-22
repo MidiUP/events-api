@@ -4,4 +4,5 @@ export interface IEventRepository {
   add: (event: CreateEventDto) => Promise<EventDto>
   getAll: () => Promise<EventDto[]>
   update: (id: number, event: CreateEventDto) => Promise<EventDto>
+  delete: (id: number) => Promise<void>
 }

@@ -1,13 +1,12 @@
-import { serverError, success } from './../../../src/presentation/helpers/http-helpers'
-import { errorValidateFunction } from './../../helpers/error-validate-mock'
-import { UnprocessableEntityError } from './../../../src/presentation/errors/unprocessable-entity-error'
-import { IEventRepository } from './../../../src/infra/db/protocols/i-event-repository'
-import { CreateEventDto, EventDto } from './../../../src/domain/dtos/events'
+import { errorValidateFunction } from '../../helpers/error-validate-mock'
+import { UnprocessableEntityError } from '../../../src/presentation/errors/unprocessable-entity-error'
+import { IEventRepository } from '../../../src/infra/db/protocols/i-event-repository'
+import { CreateEventDto, EventDto } from '../../../src/domain/dtos/events'
 import { AbstractEventService } from '../../../src/domain/usecases/abstract-event-service'
 import { CreateEventController } from '../../../src/presentation/controllers/create-event-controller'
 import { Validator } from '../../../src/presentation/protocols/validator'
 import dateMock from '../../helpers/date-mock'
-import { unprocessableEntity } from '../../../src/presentation/helpers/http-helpers'
+import { unprocessableEntity, serverError, success } from '../../../src/presentation/helpers/http-helpers'
 import { throwErrorFunction } from '../../helpers/throw-error-mock'
 
 interface SutTypes {
@@ -35,6 +34,7 @@ const makeEventValidator = (): Validator => {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
+    delete: (id: number) => Promise<void>
     update: (id: number, event: CreateEventDto) => Promise<EventDto>
 
     getAll: () => Promise<EventDto[]>

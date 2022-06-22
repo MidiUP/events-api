@@ -18,4 +18,8 @@ export abstract class AbstractEventService {
   async update (id: number, event: CreateEventDto): Promise<EventDto> {
     return await this.eventRepository.update(id, event)
   }
+
+  async delete (id: number): Promise<void> {
+    await this.eventRepository.delete(id)
+  }
 }

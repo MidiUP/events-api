@@ -20,6 +20,7 @@ const mockEventDto: EventDto = {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
+    delete: (id: number) => Promise<void>
     update: (id: number, event: CreateEventDto) => Promise<EventDto>
     async getAll (): Promise<EventDto[]> {
       return new Promise(resolve => resolve([mockEventDto]))
