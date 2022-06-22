@@ -14,14 +14,14 @@ export default class EventModel extends Model {
   date_hour: Date
 
   @Column
-  available_tickets: number
+  availableTickets: number
 
   @Column
-  sold_tickets: number
+  soldTickets: number
 
   @ForeignKey(() => Institution)
   @Column
-  id_institution: number
+  idInstitution: number
 
   @CreatedAt
   createdAt: Date

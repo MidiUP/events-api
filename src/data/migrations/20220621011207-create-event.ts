@@ -12,19 +12,19 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: false
       },
-      date_hour: {
+      dateHour: {
         type: Sequelize.DATE,
         allowNull: false
       },
-      available_tickets: {
+      availableTickets: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      sold_tickets: {
+      soldTickets: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      id_institution: {
+      idInstitution: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'institution', key: 'id' },

@@ -12,7 +12,7 @@ export default class InstitutionModel extends Model {
 
   @ForeignKey(() => CategoryInstitution)
   @Column
-  id_category_institution: number
+  idCategoryInstitution: number
 
   @CreatedAt
   createdAt: Date
