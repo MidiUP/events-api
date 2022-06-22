@@ -1,5 +1,5 @@
 import { IEventRepository } from './../../../src/infra/db/protocols/i-event-repository'
-import { CreateEventDto, eventDto } from './../../../src/domain/dtos/events'
+import { CreateEventDto, EventDto } from './../../../src/domain/dtos/events'
 import { AbstractEventService } from '../../../src/domain/usecases/abstract-event-service'
 import dateMock from '../../helpers/date-mock'
 
@@ -8,25 +8,25 @@ interface SutTypes {
   eventRepository: IEventRepository
 }
 
-const mockEventDto: eventDto = {
+const mockEventDto: EventDto = {
   id: 0,
-  available_tickets: 0,
-  date_hour: dateMock,
+  availableTickets: 0,
+  dateHour: dateMock,
   name: 'any_name',
-  sold_tickets: 0
+  soldTickets: 0
 }
 
 const mockCreateEventDto: CreateEventDto = {
-  available_tickets: 0,
-  date_hour: dateMock,
+  availableTickets: 0,
+  dateHour: dateMock,
   name: 'any_name',
-  sold_tickets: 0,
-  id_institution: 0
+  soldTickets: 0,
+  idInstitution: 0
 }
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
-    async add (event: CreateEventDto): Promise<eventDto> {
+    async add (event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
     }
   }

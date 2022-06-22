@@ -2,19 +2,19 @@ import InstitutionModel from '../models/institution'
 
 export interface CreateEventDto {
   name: string
-  date_hour: Date
-  available_tickets: number
-  sold_tickets: number
-  id_institution: number
+  dateHour: Date
+  availableTickets: number
+  soldTickets: number
+  idInstitution: number
 }
 
-export interface eventDto {
+export interface EventDto {
   id: number
   name: string
-  date_hour: Date
-  available_tickets: number
-  sold_tickets: number
-  id_institution?: number
+  dateHour: Date
+  availableTickets: number
+  soldTickets: number
+  idInstitution?: number
   createdAt?: Date
   updatedAt?: Date
   institution?: InstitutionModel

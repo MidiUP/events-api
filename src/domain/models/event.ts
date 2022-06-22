@@ -11,7 +11,7 @@ export default class EventModel extends Model {
   name: string
 
   @Column
-  date_hour: Date
+  dateHour: Date
 
   @Column
   availableTickets: number

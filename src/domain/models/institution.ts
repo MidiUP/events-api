@@ -1,5 +1,5 @@
 import { BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript'
-import CategoryInstitution from './category_institution'
+import CategoryInstitution from './category-institution'
 
 @Table({ tableName: 'institution', timestamps: true })
 export default class InstitutionModel extends Model {

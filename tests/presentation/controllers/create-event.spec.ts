@@ -2,7 +2,7 @@ import { serverError, success } from './../../../src/presentation/helpers/http-h
 import { errorValidateFunction } from './../../helpers/error-validate-mock'
 import { UnprocessableEntityError } from './../../../src/presentation/errors/unprocessable-entity-error'
 import { IEventRepository } from './../../../src/infra/db/protocols/i-event-repository'
-import { CreateEventDto, eventDto } from './../../../src/domain/dtos/events'
+import { CreateEventDto, EventDto } from './../../../src/domain/dtos/events'
 import { AbstractEventService } from '../../../src/domain/usecases/abstract-event-service'
 import { CreateEventController } from '../../../src/presentation/controllers/create-event-controller'
 import { Validator } from '../../../src/presentation/protocols/validator'
@@ -16,12 +16,12 @@ interface SutTypes {
   eventService: AbstractEventService
 }
 
-const mockEventDto: eventDto = {
+const mockEventDto: EventDto = {
   id: 0,
-  available_tickets: 0,
-  date_hour: dateMock,
+  availableTickets: 0,
+  dateHour: dateMock,
   name: 'any_name',
-  sold_tickets: 0
+  soldTickets: 0
 }
 
 const makeEventValidator = (): Validator => {
@@ -35,7 +35,7 @@ const makeEventValidator = (): Validator => {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
-    async add (event: CreateEventDto): Promise<eventDto> {
+    async add (event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
     }
   }
@@ -45,7 +45,7 @@ const makeEventRepository = (): IEventRepository => {
 
 const makeEventService = (): AbstractEventService => {
   class EventServiceStub extends AbstractEventService {
-    async create (body: any): Promise<eventDto> {
+    async create (body: any): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
     }
   }

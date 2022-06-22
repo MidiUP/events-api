@@ -1,4 +1,4 @@
-import { eventDto } from './../dtos/events'
+import { EventDto } from './../dtos/events'
 import { IEventRepository } from '../../infra/db/protocols/i-event-repository'
 import { CreateEventDto } from '../dtos/events'
 
@@ -7,7 +7,7 @@ export abstract class AbstractEventService {
     private readonly eventRepository: IEventRepository
   ) {}
 
-  async create (event: CreateEventDto): Promise<eventDto> {
+  async create (event: CreateEventDto): Promise<EventDto> {
     return this.eventRepository.add(event)
   }
 }
