@@ -1,5 +1,5 @@
-import { CreateEventDto, eventDto } from './../../../domain/dtos/events'
+import { CreateEventDto, EventDto } from './../../../domain/dtos/events'
 
 export interface IEventRepository {
-  add: (event: CreateEventDto) => Promise<eventDto>
+  add: (event: CreateEventDto) => Promise<EventDto>
 }
