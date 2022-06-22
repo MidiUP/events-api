@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.ts",
+    "dev": "nodemon src/main/server.ts",
     "test": "jest --passWithNoTests --watch --silent",
     "test:unit": "npm test -- -c jest-unit-config.js",
     "test:integration": "npm test -- -c jest-integration-config.js",
@@ -16,6 +17,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
     "sequelize": "7.0.0-alpha.2",
     "sequelize-typescript": "2.1.1",
     "yup": "^0.32.11"
