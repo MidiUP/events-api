@@ -16,7 +16,8 @@
     "dotenv": "^16.0.1",
     "mysql2": "^2.3.3",
     "sequelize": "7.0.0-alpha.2",
-    "sequelize-typescript": "2.1.1"
+    "sequelize-typescript": "2.1.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/jest": "^28.1.2",
