@@ -27,8 +27,13 @@ const mockCreateEventDto: CreateEventDto = {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
-    getById: (id: number) => Promise<EventModel>
+    async getById (id: number): Promise<EventModel> {
+      return new Promise(resolve => resolve(mockEventDto as EventModel))
+    }
+
     async delete (id: number): Promise<void> {}
+
+    async sellerTicketEvent (id: number): Promise<void> {}
 
     async update (eventForUpdate: EventModel, event: CreateEventDto): Promise<EventDto> {
       return new Promise(resolve => resolve(mockEventDto))
@@ -105,6 +110,34 @@ describe('AbstractEventService delete', () => {
     const { sut } = makeSut()
     const mockId = 1
     const response = await sut.delete(mockId)
+    expect(response).toEqual(undefined)
+  })
+})
+
+describe('AbstractEventService sellerTicketEvent', () => {
+  test('eventRepository getById sellerTicketEvent shold be called with correct params', async () => {
+    const { sut, eventRepository } = makeSut()
+    const spyEventRepositoryGetById = jest.spyOn(eventRepository, 'getById')
+    const mockId = 1
+    const mockSelledTickets = 1
+    await sut.sellerTicketEvent(mockId, mockSelledTickets)
+    expect(spyEventRepositoryGetById).toHaveBeenCalledWith(mockId)
+  })
+
+  test('eventRepository update sellerTicketEvent shold be called with correct params', async () => {
+    const { sut, eventRepository } = makeSut()
+    const spyEventRepositoryUpdate = jest.spyOn(eventRepository, 'update')
+    const mockId = 1
+    const mockSelledTickets = 1
+    await sut.sellerTicketEvent(mockId, mockSelledTickets)
+    expect(spyEventRepositoryUpdate).toHaveBeenCalledWith(mockEventDto, { ...mockEventDto, soldTickets: 1 })
+  })
+
+  test('shold return noContent if all right', async () => {
+    const { sut } = makeSut()
+    const mockId = 1
+    const mockSelledTickets = 1
+    const response = await sut.sellerTicketEvent(mockId, mockSelledTickets)
     expect(response).toEqual(undefined)
   })
 })

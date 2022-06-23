@@ -27,4 +27,10 @@ export abstract class AbstractEventService {
   async delete (id: number): Promise<void> {
     await this.eventRepository.delete(id)
   }
+
+  async sellerTicketEvent (idEvent: number, selledTickets: number): Promise<void> {
+    const event = await this.eventRepository.getById(idEvent)
+    const eventSelled = { ...event, soldTickets: event.soldTickets + selledTickets }
+    await this.eventRepository.update(event, eventSelled)
+  }
 }
