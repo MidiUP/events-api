@@ -30,6 +30,7 @@ services:
       - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - DB_DATABASE=$MYSQLDB_DATABASE
       - DB_PORT=$MYSQLDB_DOCKER_PORT
+      - KEY_JWT=$KEY_JWT
 volumes: 
   db:
   api:
