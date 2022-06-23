@@ -8,7 +8,6 @@ let server: any
 describe('tests integration of create event', () => {
   beforeAll(async () => {
     server = app.listen(process.env.PORT, () => console.log(`Server running in test mode at http://localhost:${process.env.PORT}`))
-    console.log('3')
   })
 
   afterAll(async () => {

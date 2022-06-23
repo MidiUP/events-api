@@ -13,7 +13,6 @@ describe('tests integration of delete event', () => {
   beforeAll(async () => {
     server = app.listen(process.env.PORT, () => console.log(`Server running in test mode at http://localhost:${process.env.PORT}`))
     eventTest = await createEventTests()
-    console.log('1')
   })
 
   afterAll(async () => {

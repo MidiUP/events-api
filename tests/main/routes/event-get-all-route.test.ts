@@ -11,7 +11,6 @@ describe('tests integration of get event', () => {
   beforeAll(async () => {
     server = app.listen(process.env.PORT, () => console.log(`Server running in test mode at http://localhost:${process.env.PORT}`))
     await createEventTests()
-    console.log('2')
   })
 
   afterAll(async () => {
