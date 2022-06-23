@@ -4,7 +4,6 @@ import { UnprocessableEntityError } from '../presentation/errors/unprocessable-e
 
 export class OrderCreateValidator implements Validator {
   private readonly schema = yup.object().shape({
-    idUser: yup.number().required('idUser is a required field').typeError('idUser shold be a number').min(1, 'idUser shold be greater than 0'),
     idEvent: yup.number().required('idEvent is a required field').typeError('idEvent shold be a number').min(1, 'idEvent shold be greater than 0'),
     quantityTickets: yup.number().required('quantityTickets is a required field').typeError('quantityTickets shold be a number').min(1, 'quantityTickets shold be greater than 0')
   })

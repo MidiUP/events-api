@@ -7,7 +7,8 @@ export const adapterRouter = (controller: Controller) => {
     const request: HttpRequest = {
       header: {
         params: req.params,
-        query: req.query
+        query: req.query,
+        infoToken: req?.infoToken
       },
       body: req.body
     }

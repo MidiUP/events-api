@@ -100,7 +100,7 @@ describe('AbstractUserService generateToken', () => {
     const { sut, managerToken } = makeSut()
     const spyManagerToken = jest.spyOn(managerToken, 'generateToken')
     await sut.generateToken(mockUser as UserModel)
-    expect(spyManagerToken).toHaveBeenCalledWith({ id: mockUser.id })
+    expect(spyManagerToken).toHaveBeenCalledWith({ idUser: mockUser.id })
   })
 
   test('shold return true if all right', async () => {

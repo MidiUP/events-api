@@ -19,6 +19,10 @@ export abstract class AbstractUserService {
   }
 
   async generateToken (user: UserModel): Promise<string> {
-    return this.managerToken.generateToken({ id: user.id })
+    return this.managerToken.generateToken({ idUser: user.id })
+  }
+
+  async checkToken (token: string): Promise<any> {
+    return this.managerToken.validateToken(token)
   }
 }

@@ -13,42 +13,9 @@ const makeSut = (): sutTypes => {
 }
 
 describe('order create validation', () => {
-  test('should return error if idUser is not passed', async () => {
-    const { sut } = makeSut()
-    const req = {
-      idEvent: 1,
-      quantityTickets: 1
-    }
-    const result = await sut.validate(req)
-    expect(result).toEqual(new UnprocessableEntityError('idUser is a required field'))
-  })
-
-  test('should return error if idUser is not number', async () => {
-    const { sut } = makeSut()
-    const req = {
-      idUser: 'not_number',
-      idEvent: 1,
-      quantityTickets: 1
-    }
-    const result = await sut.validate(req)
-    expect(result).toEqual(new UnprocessableEntityError('idUser shold be a number'))
-  })
-
-  test('should return error if idUser is not greater than 0', async () => {
-    const { sut } = makeSut()
-    const req = {
-      idUser: -1,
-      idEvent: 1,
-      quantityTickets: 1
-    }
-    const result = await sut.validate(req)
-    expect(result).toEqual(new UnprocessableEntityError('idUser shold be greater than 0'))
-  })
-
   test('should return error if idEvent is not passed', async () => {
     const { sut } = makeSut()
     const req = {
-      idUser: 1,
       quantityTickets: 1
     }
     const result = await sut.validate(req)
@@ -59,7 +26,6 @@ describe('order create validation', () => {
     const { sut } = makeSut()
     const req = {
       idEvent: 'not_number',
-      idUser: 1,
       quantityTickets: 1
     }
     const result = await sut.validate(req)
@@ -70,7 +36,6 @@ describe('order create validation', () => {
     const { sut } = makeSut()
     const req = {
       idEvent: -1,
-      idUser: 1,
       quantityTickets: 1
     }
     const result = await sut.validate(req)
@@ -80,7 +45,6 @@ describe('order create validation', () => {
   test('should return error if quantityTickets is not passed', async () => {
     const { sut } = makeSut()
     const req = {
-      idUser: 1,
       idEvent: 1
     }
     const result = await sut.validate(req)
@@ -91,7 +55,6 @@ describe('order create validation', () => {
     const { sut } = makeSut()
     const req = {
       quantityTickets: 'not_number',
-      idUser: 1,
       idEvent: 1
     }
     const result = await sut.validate(req)
@@ -102,7 +65,6 @@ describe('order create validation', () => {
     const { sut } = makeSut()
     const req = {
       quantityTickets: -1,
-      idUser: 1,
       idEvent: 1
     }
     const result = await sut.validate(req)
@@ -113,7 +75,6 @@ describe('order create validation', () => {
     const { sut } = makeSut()
     const req = {
       quantityTickets: 1,
-      idUser: 1,
       idEvent: 1
     }
     const result = await sut.validate(req)

@@ -33,7 +33,7 @@ describe('jwt tests', () => {
     const { sut } = makeSut()
     const token = await sut.generateToken(dataToken)
     const result = await sut.validateToken(token)
-    expect(result).toBe(true)
+    expect(typeof result).toBe('object')
   })
 
   test('shold false in invalid token was seted', async () => {

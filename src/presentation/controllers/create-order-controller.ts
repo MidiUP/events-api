@@ -11,6 +11,7 @@ export class CreateOrderController implements Controller {
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
+    console.log(request.header?.infoToken) // console deixado de propósito para mostrar funcionamento da autenticação
     try {
       const errorValidator = await this.orderValidator.validate(request.body)
       if (errorValidator) {

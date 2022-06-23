@@ -7,13 +7,12 @@ export class Jwt implements ManagerToken {
   ) {}
 
   async generateToken (data: Object): Promise<string> {
-    return new Promise(resolve => resolve(jwt.sign(data, this.key)))
+    return new Promise(resolve => resolve(jwt.sign(data, this.key, { expiresIn: '1h' })))
   }
 
-  async validateToken (token: string): Promise<boolean> {
+  async validateToken (token: string): Promise<any> {
     try {
-      jwt.verify(token, this.key)
-      return true
+      return jwt.verify(token, this.key)
     } catch (err) {
       return false
     }
