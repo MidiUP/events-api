@@ -6,10 +6,10 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "dev": "nodemon src/main/server.ts",
-    "test": "jest --passWithNoTests --watch --silent",
-    "test:all": "jest --passWithNoTests --watchAll --silent",
-    "test:unit": "npm test -- -c jest-unit-config.js",
-    "test:integration": "npm test -- -c jest-integration-config.js",
+    "test": "jest --passWithNoTests --watch ",
+    "test:all": "jest --passWithNoTests --watchAll --silent --maxWorkers=1",
+    "test:unit": "npm test -- --lastCommit -c jest-unit-config.js",
+    "test:integration": "npm test -- --testTimeout=50000 --maxWorkers=1 -c jest-integration-config.js",
     "prepare-husky": "husky install"
   },
   "author": "Mateus Mendes",
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@types/jest": "^28.1.2",
     "@types/node": "^17.0.21",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
     "eslint": "^8.10.0",
@@ -40,6 +41,7 @@
     "lint-staged": "^13.0.2",
     "nodemon": "^2.0.15",
     "sequelize-cli": "6.3.0",
+    "supertest": "^6.2.3",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",

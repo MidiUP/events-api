@@ -163,4 +163,17 @@ describe('event create validation', () => {
     const result = await sut.validate(req)
     expect(result).toEqual(new UnprocessableEntityError('idInstitution shold be greater than 0'))
   })
+
+  test('should return null if all right', async () => {
+    const { sut } = makeSut()
+    const req = {
+      name: 'any_name',
+      dateHour: '06/19/1999',
+      idInstitution: 1,
+      availableTickets: 1,
+      soldTickets: 1
+    }
+    const result = await sut.validate(req)
+    expect(result).toEqual(null)
+  })
 })
