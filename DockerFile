@@ -4,9 +4,14 @@ WORKDIR /app
 
 COPY package.json /app
 
+COPY .. /app/
+
 RUN npm install
 
-COPY .. /app/
+RUN npm install -g typescript
+
+RUN npm install -g sequelize-cli
+
 
 
 

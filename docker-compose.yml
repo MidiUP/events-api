@@ -18,10 +18,10 @@ services:
     build:
       context: .
       dockerfile: DockerFile
-    command: npm run dev
+    command: sh -c "npm run execute:migration && npm run dev"
     volumes:
       - '.:/app'
-      - '/app/node_modules'
+      - 'api:/app/node_modules'
     ports:
       - '8080:8080'
     environment:
@@ -32,3 +32,4 @@ services:
       - DB_PORT=$MYSQLDB_DOCKER_PORT
 volumes: 
   db:
+  api:
