@@ -27,3 +27,10 @@ export const unprocessableEntity = (error: Error): HttpResponse => {
     body: error
   }
 }
+
+export const unauthorized = (error: Error): HttpResponse => {
+  return {
+    statusCode: 401,
+    body: error
+  }
+}
