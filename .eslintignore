@@ -1,3 +1,4 @@
 migrations
 jest-unit-config.ts
 jest-integration-config.ts
+dist
