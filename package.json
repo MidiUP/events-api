@@ -13,6 +13,7 @@
     "test:integration": "npm test -- --testTimeout=50000 --maxWorkers=1 -c jest-integration-config.js",
     "test:coverage": "jest --collect-coverage --maxWorkers=1 --silent",
     "execute:migration": "npx sequelize-cli db:migrate",
+    "execute:seeders": "npx sequelize-cli db:seed:all",
     "prepare-husky": "husky install"
   },
   "author": "Mateus Mendes",
