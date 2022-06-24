@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: DockerFile
-    command: sh -c "npm run execute:migration && npm run dev"
+    command: sh -c "npm run execute:migration && npm run build && npm start"
     volumes:
       - '.:/app'
       - 'api:/app/node_modules'
