@@ -6,9 +6,6 @@ export const makeFiltersOption = (attributes: any): any => {
   const { date, dates, institution, categoryInstitution } = attributes
   let conditionsWhere: any
 
-  console.log('date', date)
-  console.log('dates', dates)
-
   if (dates) {
     conditionsWhere = {
       ...conditionsWhere,
@@ -48,6 +45,6 @@ export const makeFiltersOption = (attributes: any): any => {
           }]
         }
       ]
-  console.log({ where: conditionsWhere, include: conditionsInclude })
+
   return { where: conditionsWhere, include: conditionsInclude }
 }
