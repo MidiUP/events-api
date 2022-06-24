@@ -32,10 +32,6 @@ npm run dev or docker-compose up
 * LinkedIn: [@mateusmendes](https://www.linkedin.com/in/mateus-mendes-23340021b/)
 
 
-## ✨ Show your support
-
-Give a ⭐️ if this project helped you!
-
 ---
 
 ## 📝 License
