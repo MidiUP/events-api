@@ -6,6 +6,7 @@ import EventModel from '../models/event'
 export abstract class AbstractEventService {
   constructor (
     private readonly eventRepository: IEventRepository
+
   ) {}
 
   async create (event: CreateEventDto): Promise<EventDto> {
@@ -32,5 +33,9 @@ export abstract class AbstractEventService {
     const event = await this.eventRepository.getById(idEvent)
     const eventSelled = { ...event, soldTickets: event.soldTickets + selledTickets }
     await this.eventRepository.update(event, eventSelled)
+  }
+
+  async getEventsByFilters (attributes: any): Promise<EventDto[]> {
+    return await this.eventRepository.getByFilters(attributes)
   }
 }

@@ -75,7 +75,7 @@ describe('event create validation', () => {
     expect(result).toEqual(new UnprocessableEntityError('availableTickets shold be a number'))
   })
 
-  test('should return error if availableTickets is not greater than 0', async () => {
+  test('should return error if availableTickets is not greater than or equals than 0', async () => {
     const { sut } = makeSut()
     const req = {
       name: 'any_name',
@@ -85,7 +85,7 @@ describe('event create validation', () => {
       idInstitution: 1
     }
     const result = await sut.validate(req)
-    expect(result).toEqual(new UnprocessableEntityError('availableTickets shold be greater than 0'))
+    expect(result).toEqual(new UnprocessableEntityError('availableTickets shold be greater or equals than 0'))
   })
 
   test('should return error if soldTickets is not passed', async () => {

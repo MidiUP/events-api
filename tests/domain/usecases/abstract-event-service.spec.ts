@@ -27,6 +27,7 @@ const mockCreateEventDto: CreateEventDto = {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
+    getByFilters: (filters: any) => Promise<EventDto[]>
     async getById (id: number): Promise<EventModel> {
       return new Promise(resolve => resolve(mockEventDto as EventModel))
     }

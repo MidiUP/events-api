@@ -7,4 +7,5 @@ export interface IEventRepository {
   getById: (id: number) => Promise<EventModel>
   update: (eventForUpdate: EventModel, newEvent: CreateEventDto) => Promise<EventDto>
   delete: (id: number) => Promise<void>
+  getByFilters: (filters: any) => Promise<EventDto[]>
 }

@@ -1,4 +1,5 @@
-import { formatEventDto } from './../helpers/format-event-dto'
+import { makeFiltersOption } from '../utils/event/makeFiltersOptions'
+import { formatEventDto } from '../utils/format-event-dto'
 import { sequelize } from '../../../data/sequelize'
 import { CreateEventDto, EventDto } from '../../../domain/dtos/events'
 import EventModel from '../../../domain/models/event'
@@ -34,5 +35,11 @@ export class EventRepository implements IEventRepository {
     await this.repositoryEvent.destroy({
       where: { id }
     })
+  }
+
+  async getByFilters (filters: any): Promise<EventDto[]> {
+    const options = makeFiltersOption(filters)
+    const eventsFiltered = await this.repositoryEvent.findAll({ ...options })
+    return eventsFiltered
   }
 }

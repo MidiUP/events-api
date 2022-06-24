@@ -36,6 +36,7 @@ const makeEventValidator = (): Validator => {
 
 const makeEventRepository = (): IEventRepository => {
   class EventRepositoryStub implements IEventRepository {
+    getByFilters: (filters: any) => Promise<EventDto[]>
     update: (eventForUpdate: EventModel, newEvent: CreateEventDto) => Promise<EventDto>
     getAll: () => Promise<EventDto[]>
 
